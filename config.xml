@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<widget xmlns		= "http://www.w3.org/ns/widgets"	
+  xmlns:gap	= "http://phonegap.com/ns/1.0"
+  id = "mobi.barroncatalogue.app"
+  version = "1.0.1">
+
+  <name>Barron Catalogue</name>
+
+  <description>
+    Barron Catalogue app.
+  </description>
+
+  <preference name="phonegap-version" value="2.6.0"/>
+  <preference name="orientation" value="portrait"/>
+  <preference name="stay-in-webview" value="false" />
+
+  <feature name="http://api.phonegap.com/1.0/geolocation" />
+  <feature name="http://api.phonegap.com/1.0/network" />
+  <feature name="http://api.phonegap.com/1.0/notification" />
+  <feature name="http://api.phonegap.com/1.0/file"/>
+  <feature name="http://api.phonegap.com/1.0/camera"/>
+  <feature name="http://api.phonegap.com/1.0/media"/>
+  <feature name="http://api.phonegap.com/1.0/device"/>
+    
+  <icon src="icon.png" />
+
+  <access origin="*" />
+</widget>
