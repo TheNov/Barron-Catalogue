@@ -19,11 +19,13 @@ function createFile(name, data, callbackVars, callback, skipOverwrite, overwrite
 }
 
 function gotFSCreate(fileSystem) {
+    alert("gotFSCreate");
     // once fily system is accessed, add the file with create options
     fileSystem.root.getFile(this.fileName, { create: true, exclusive: false }, gotCreateEntry, fail);
 }
     
 function gotCreateEntry(fileEntry) {
+    alert("gotCreateEntry");
     // create writer
     if (overwrite){
         fileEntry.createWriter(gotFileWriter, fail);
@@ -34,6 +36,8 @@ function gotCreateEntry(fileEntry) {
     
 function gotFileWriter(writer) {
     // execute writer...
+    alert("gotFileWriter");
+
     writer.onwriteend = function (evt) {
         callback(callbackVars);
     };
