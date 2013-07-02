@@ -8,17 +8,21 @@ var overwrite = true;
 
 //<write start>
 function createFile(name, data, callbackVars, callback, skipOverwrite, overwrite) {
+    try
+    {
+        alert("createFile");
 
-    alert("createFile");
-
-    this.fileName = name;
-    this.fileData = data;
-    this.callbackVars = callbackVars;
-    this.callback = callback;
-    if (overwrite !== undefined){
-        this.overwrite = overwrite;
+        this.fileName = name;
+        this.fileData = data;
+        this.callbackVars = callbackVars;
+        this.callback = callback;
+        if (overwrite !== undefined){
+            this.overwrite = overwrite;
+        }
+        window.requestFileSystem(window.TEMPORARY, 80 * 1024 * 1024, gotFSCreate, function () { alert("createFile fail"); });
+    } catch (ex) {
+        alert(ex);
     }
-    window.requestFileSystem(window.TEMPORARY, 80 * 1024 * 1024, gotFSCreate, function () { alert("createFile fail"); });
 }
 
 function gotFSCreate(fileSystem) {
