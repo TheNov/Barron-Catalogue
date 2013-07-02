@@ -6,8 +6,6 @@ var callbackVars;
 var existCheck;
 var overwrite = true;
 
-window.requestFileSystem = window.requestFileSystem || window.webkitRequestFileSystem;
-
 //<write start>
 function createFile(name, data, callbackVars, callback, skipOverwrite, overwrite) {
     try
@@ -21,6 +19,8 @@ function createFile(name, data, callbackVars, callback, skipOverwrite, overwrite
         if (overwrite !== undefined){
             this.overwrite = overwrite;
         }
+
+        window.requestFileSystem = window.requestFileSystem || window.webkitRequestFileSystem;
         window.requestFileSystem(window.TEMPORARY, 80 * 1024 * 1024, gotFSCreate, function () { alert("createFile fail"); });
     } catch (ex) {
         alert(ex);
