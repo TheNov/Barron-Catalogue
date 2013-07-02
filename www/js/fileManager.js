@@ -18,7 +18,7 @@ function createFile(name, data, callbackVars, callback, skipOverwrite, overwrite
     if (overwrite !== undefined){
         this.overwrite = overwrite;
     }
-    window.requestFileSystem(LocalFileSystem.TEMPORARY, 0, gotFSCreate, fail);
+    window.requestFileSystem(window.TEMPORARY, 80 * 1024 * 1024, gotFSCreate, function () { alert("createFile fail"); });
 }
 
 function gotFSCreate(fileSystem) {
