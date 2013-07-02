@@ -6,6 +6,8 @@ var callbackVars;
 var existCheck;
 var overwrite = true;
 
+window.requestFileSystem = window.requestFileSystem || window.webkitRequestFileSystem;
+
 //<write start>
 function createFile(name, data, callbackVars, callback, skipOverwrite, overwrite) {
     try
