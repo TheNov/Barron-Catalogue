@@ -7,7 +7,10 @@ var existCheck;
 var overwrite = true;
 
 //<write start>
-function createFile(name, data, callbackVars, callback, skipOverwrite, overwrite){
+function createFile(name, data, callbackVars, callback, skipOverwrite, overwrite) {
+
+    alert("createFile");
+
     this.fileName = name;
     this.fileData = data;
     this.callbackVars = callbackVars;
