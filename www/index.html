@@ -1,435 +1,48 @@
-﻿<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <title></title>
+<!DOCTYPE html>
+<!--
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information/Users/conradbrits/Library/Developer/Xcode/DerivedData/BaronCatalogue-cgayakrgymgtvifinftsmuyfauvl/Build/Products/Debug-iphoneos/BaronCatalogue.app
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
 
-	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
-	<meta name="apple-mobile-web-app-capable" content="yes" />
+    http://www.apache.org/licenses/LICENSE-2.0
 
-	<link href="css/kevromobi.css" type="text/css" rel="stylesheet" />
-	
-    <script type="text/javascript" src="js/generalHandlers.js"></script>
-	<script type="text/javascript" src="js/CookieManager.js"></script>
-	<script type="text/javascript" src="js/jquery-1.9.1.js"></script>
-	<script type="text/javascript" src="js/jquery.base64.js"></script>
-	<script type="text/javascript" src="js/webtoolkit.base64.js"></script>
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <link rel="stylesheet" type="text/css" href="css/kevromobi.css" />
+        <title>Kevro Mobi Splash</title>
+    </head>
+    <body>
 
-    <script type="text/javascript">
-	    function addNewItem(window, PhotoSwipe) {
-            var options = {},
-					instance = PhotoSwipe.attach(window.document.querySelectorAll('#Gallery a'), options);
-	    }
-	</script>
-</head>
-<body>
-    <div id="divLoader"></div>
-    <div class="Header">
-        <table style="width:100%; cellpadding="0" cellspacing="0"> 
-            <tr>
-                <td style="text-align:left; width:20%;"><input type="button" class="btnBack" id="btnBack" value="Back" /></td>
-                <td style="text-align:center;"><span id="spanPageHeading" class="spanPageHeading"></span></td>
-                <td style="text-align:right; width:20%;"><input type="button" class="btnChangeCatalogue" id="btnChangeCatalogue" value="Change Catalogue" onclick="setupPage(0);" /></td>
-            </tr>
-        </table>
-    </div>
-    <div class="Banner">
-        <div class="divLogo"></div>
-    </div>
-    
-    <div class="Content">
-        <input type="button" name="" value="Load Catalogue 1" onclick="listCatalogues(1);" />
-        <div id="divCatalogueSelect" style="display:none;">
-            <div class="PageHeading">Catalogues</div>
-            <br />
-            
-            <div id="divDownCatalogues">
+        <div class="Splash"></div>
 
-                <div style="clear:both;"></div>
+        <div class="app" style="display:none !important;">
+            <h1>Apache Cordova</h1>
+            <div id="deviceready" class="blink">
+                <p class="event listening">Connecting to Device</p>
+                <p class="event received">Device is Ready</p>
             </div>
-
-            <div id="divDeviceCatalogues">
-
-                <div style="clear:both;"></div>
-            </div>
-
-            Download Progress: <span id="spanDownloadCount"></span> of <span id="spanDownloadOf"></span>
-
         </div>
-
-        <div id="divListing" style="display:none;">
-
-        </div>
-
-        <div id="divDetail" style="display:none;">
-            <div>
-                <!--Images -->
-
-                <span id="spanProductImages">
-
-                </span>
-            </div>
-            <div>
-                <span id="spanProductName"></span>
-                Description
-                <span id="spanProductDescription"></span>
-                <span id="spanVariants"></span>
-            </div>
-        </div>  
-        
-        <div style="clear:both;"></div>
-    </div>
-
-    <div class="Footer" id="Footer">
-	
-    </div>
-
-    <div id="divProcess" style="display:none;">
-    
-        <!-- hidden dev and download div -->
-
-
-        <div id="MainContent">
-    
-        
-
-            <ul id="Gallery" class="gallery">
-	        
-            </ul>
-	    </div>
-
-        <a href="javascript:addNewItem(window, window.Code.PhotoSwipe);">Add Another Item</a>
-
-
-    </div>
-
-    <input type="hidden" id="hidCatalogueID" value=" " />
-
-    <textarea id="traceText"></textarea>
-
-    <script type="text/javascript">
-
-        var divCatalogueSelect = document.getElementById("divCatalogueSelect");
-        var divListing = document.getElementById("divListing");
-        var divDetail = document.getElementById("divDetail");
-        var divProcess = document.getElementById("divProcess");
-        
-        var spanPageHeading = document.getElementById("spanPageHeading");
-        var traceText = document.getElementById("traceText");
-
-        var divDownCatalogues = document.getElementById("divDownCatalogues");
-        var divDeviceCatalogues = document.getElementById("divDeviceCatalogues");
-        var spanDownloadCount = document.getElementById("spanDownloadCount");
-        var spanDownloadOf = document.getElementById("spanDownloadOf");
-        var hidCatalogueID = document.getElementById("hidCatalogueID");
-
-        var spanProductName = document.getElementById("spanProductName");
-        var spanProductDescription = document.getElementById("spanProductDescription");
-        var spanVariants = document.getElementById("spanVariants");
-
-        var siteURL = "http://kevro.liquidbox.co.za/";
-        var catalogueStorage = "catalogueStorage";
-        var imageStorage = "imageStorage";
-
-        
-
-        var currentCatalogueID = 0;
-        var currentDownloadPage = 0;
-        var currentPageCount = 0;
-        var iDownloadCount = 0;
-
-        var sKey;
-
-        function loadCatalogues() {
-            WSCall(loadCataloguesComplete, "GetCatalogues", []);
-        }
-
-        function loadCataloguesComplete(result, data) {
-            try {
-                if (result) {
-                    var sResult = getTagValue(data, "result");
-                    if (sResult == "1") {
-                        var row = 0;
-
-                        var sCatalogueHTML = "";
-
-                        $(data).find("catalogue").each(function () {
-
-                            sCatalogueHTML += "<div class='catalogueTopLevel' style='";
-                            sCatalogueHTML += "background-image: url(data:image/png;base64," + $(this).find("PortraitImage").text() + ");";
-                            sCatalogueHTML += "'><div>";
-                            sCatalogueHTML += $(this).find("CatalogueName").text();
-                            sCatalogueHTML += "(" + getMBValue($(this).find("FileSize").text()) + ") | <a onclick=\"downloadCataloguePages(" + $(this).find("CatalogueID").text() + ", ";
-                            sCatalogueHTML += "'" + $(this).find("CatalogueName").text() + "', ";
-                            sCatalogueHTML += "'" + $(this).find("Icon").text() + "',  ";
-                            sCatalogueHTML += "'" + $(this).find("PortraitImage").text() + "',  ";
-                            sCatalogueHTML += "'" + $(this).find("LandscapeImage").text() + "'";
-                            sCatalogueHTML += ");\">Download Now</a>";
-                            sCatalogueHTML +=  "</div></div>";
-                        });
-
-                        divDownCatalogues.innerHTML = sCatalogueHTML;
-                    }
-                    else {
-                        handleError("getProductsComplete", getTagValue(data, "data"), "issue in data processing");
-                    }
-                }
-                else {
-                    handleError("getProductsComplete", "", "getProductsComplete return is empty");
-                }
-            }
-            catch (ex) {
-                handleError("getProductsComplete", ex, "getProductsComplete no return");
-            }
-        }
-
-        function openCatalogue(CatalogueID, Pages) {
-
-        }
-
-        function downloadCataloguePages(CatalogueID, CatalogueName, Icon, PortraitImage, LandscapeImage) {
-            try {
-                //create catalogue entry
-
-                catalogueStorage = "catalogueItem" + CatalogueID;
-
-                localStorage.setItem(catalogueStorage, [CatalogueID, CatalogueName, Icon, PortraitImage, LandscapeImage]);
-
-                if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
-                    xmlhttp = new XMLHttpRequest();
-                }
-                else {// code for IE6, IE5
-                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-                }
-                xmlhttp.onreadystatechange = function () {
-                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                        catalogueStorage = "catalogueData" + CatalogueID;
-                        localStorage.setItem(catalogueStorage, xmlhttp.responseText);
-                    }
-                }
-                xmlhttp.open("GET", siteURL + "/admin/uploads/catalogues/" + CatalogueID + ".xml?t=" + new Date(), true);
-                xmlhttp.send();
-
-                //runDownload();
-
-            } catch (ex) {
-                handleError("downloadCataloguePages", ex, "failed to download:");
-            }
-        }
-
-        function loadCategoryListing(catalogueID) {
-            catalogueStorage = "catalogueData" + CatalogueID;
-            var data = localStorage.getItem(catalogueStorage);
-
-            $(data).find("catalogue").each(function () {
-
-                sCatalogueHTML += "<div class='catalogueTopLevel' style='";
-                sCatalogueHTML += "background-image: url(data:image/jpg;base64," + $(this).find("PortraitImage").text() + ");";
-                sCatalogueHTML += "'><div>";
-                sCatalogueHTML += $(this).find("CatalogueName").text();
-                sCatalogueHTML += "</div></div>";
-            });
-        }
-
-        function runDownload(catalogueID, type) {
-            try { 
-                catalogueStorage = "catalogueData" + catalogueID;
-                var sXML = localStorage.getItem(catalogueStorage);
-
-                try {
-                    if (type == 1) {
-                        // product images
-                        $(sXML).find("productimage").each(function () {
-                            // check if image exists
-                            imageStorage = "imageStorage" + $(this).find("ProductImageID").text();
-                            localStorage.getItem(imageStorage)
-                            if (localStorage.getItem(imageStorage) == null) {
-                                // if image doesn't exist 
-                                divProcess.innerHTML += "<img src=\"" + siteURL + "admin/Uploads/catalogues/images/products/" + $(this).find("ProductImageID").text() 
-                                        + ".jpg\" onload=\"getBase64Image(this, 'imageStorage" + $(this).find("ProductImageID").text() + "', " + catalogueID + ", " + type + ")\" />";
-
-                                a = b;
-                            }
-                        });
-
-                    } else if (type == 0) {
-                        // catagory images
-                        $(sXML).find("productcategories").each(function () {
-                            // check if image exists
-                            imageStorage = "imageCatStorage" + $(this).find("productcategoryid").text();
-                            localStorage.getItem(imageStorage)
-                            if (localStorage.getItem(imageStorage) == null) {
-                                // if image doesn't exist 
-                                divProcess.innerHTML += "<img src=\"" + siteURL + "images/productcategories/" + $(this).find("productcategoryid").text() + "." + $(this).find("ProductCategoryImage").text() +
-                                        "\" onload=\"getBase64Image(this, 'imageCatStorage" + $(this).find("productcategoryid").text() + "', " + catalogueID + ", " + type + ")\" />";
-
-                                a = b;
-                            }
-                        });
-                    }
-                } catch (ex) {
-                    // operation breaks delibirately
-                }
-                
-            } catch (ex) {
-                handleError("runDownload", ex, "")
-            }
-        }
-
-        function getBase64Image(img, imageRef, catalogueID, type) {
-
-            // Create an empty canvas element
-            var canvas = document.createElement("canvas");
-            canvas.width = img.width;
-            canvas.height = img.height;
-
-            // Copy the image contents to the canvas
-            var ctx = canvas.getContext("2d");
-            ctx.drawImage(img, 0, 0);
-
-            var dataURL = canvas.toDataURL("image/jpg", 0.85);
-
-            localStorage.setItem(imageRef, dataURL.replace(/^data:image\/(png|jpg);base64,/, ""));
-
-            img.parentNode.removeChild(img);
-
-            runDownload(catalogueID, type);
-        }
-
-        function setupPage(page) {
-            divCatalogueSelect.style.display = "none";
-            divListing.style.display = "none";
-            divDetail.style.display = "none";
+        <script type="text/javascript" src="cordova-2.2.0.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript">
+            app.initialize();
             
-            if (page == 0) {
-                divCatalogueSelect.style.display = "";
-                spanPageHeading.innerHTML = "Select A Catalogue";
-                loadCatalogues();
-            } else if (page == 1) {
-                divListing.style.display = "";
-            } else if (page === 2) {
-                divDetail.style.display = "";
-            }
-        }
-
-        function pageLoad() {
-            //check for downloaded catalogues
-            var catalogues = localStorage.getItem(catalogueStorage);
-            
-            if (catalogues == null || catalogues.length == 0) {
-                divDeviceCatalogues.innerHTML = "Sorry, you have no downloaded catalogues on your device.";
-            } else {
-                var cataloguesHTML = "";
-                for (i = 0; i < catalogues.length; i++) {
-                    cataloguesHTML += "<div class='catalogueTopLevel' onclick=\"openCatalogue(" + catalogues[i][0] + ", " + catalogues[i][2] + ");\">"
-                                    + catalogues[i][1] + "</div>";
-                }
-                divDeviceCatalogues.innerHTML = cataloguesHTML;
-            }
-
-        }
-
-        function getMBValue(input){
-            var sReturn =  parseInt(input) / 1024 / 1024;
-            sReturn = roundNumber(sReturn, 2);
-            return sReturn + "mb";
-        }
-
-        function roundNumber(num, dec) {
-
-            if (num == 0) { num = 0.001; }
-
-            num = parseFloat(num);
-
-            var result = num.toFixed(dec);
-
-            result = result.substring(0, result.indexOf(".") + 3 );
-            return result;
-        }
-
-        // Listing
-
-        function listCatalogues(catalogueID) {
-
-            catalogueStorage = "catalogueData" + catalogueID;
-            var sXML = localStorage.getItem(catalogueStorage);
-
-            hidCatalogueID.value = catalogueID;
-
-            var sHTML = "";
-
-            $(sXML).find("productcategory").each(function () {
-                // check if image exists
-
-                sHTML += "<div class='productItem' onclick='listProducts(" + $(this).find("productcategoryid").text() + ");'>";
-                sHTML += "  <div class='categoryImage'></div>";
-                sHTML += "  <div class='categoryName'>" + $(this).find("productcategoryname").text() + "</div>";
-                sHTML += "</div>";
-
-            });
-
-            divListing.innerHTML = sHTML;
-
-            spanPageHeading.innerHTML = "Select A Catagory";
-            setupPage(1);
-        }
-
-        function listProducts(catagoryID) {
-
-            catalogueStorage = "catalogueData" + hidCatalogueID.value;
-            var sXML = localStorage.getItem(catalogueStorage);
-
-            var sHTML = "";
-
-            $(sXML).find("productcategory").each(function () {
-                // check if image exists
-                if ($(this).find("productcategoryid").text() == catagoryID) {
-                    $(this).find("product").each(function () {
-                        sHTML += "<div class='productItem' onclick='openProduct(" + $(this).find("productid").text() + ");'>"
-                        sHTML += "  <div class='productImage'></div>"
-                        sHTML += "  <div class='productName'>" + $(this).find("productname").text() + "</div>"
-                        sHTML += "</div>"
-                    });
-                }
-            });
-
-            divListing.innerHTML = sHTML;
-            spanPageHeading.innerHTML = "Select A Product";
-            setupPage(1);
-        }
-
-        function openProduct(productID) {
-            
-            catalogueStorage = "catalogueData" + hidCatalogueID.value;
-            var sXML = localStorage.getItem(catalogueStorage);
-
-            var sHTML = "";
-
-            var sVariant1 = "";
-            var sVariant2 = "";
-
-            $(sXML).find("product").each(function () {
-                // check if image exists
-                if ($(this).find("productid").text() == productID) {
-                    spanProductName.innerHTML = $(this).find("productname").text();
-                    spanProductDescription.innerHTML = $(this).find("description").text();
-
-                    $(this).find("productvariant").each(function () {
-
-                        if (sVariant2.indexOf($(this).find("variant2").text()) > -1) {
-                            sVariant2 += $(this).find("variant2").text() + ", ";
-                        }
-                    });
-
-                    spanVariants.innerHTML = sVariant2;
-                }
-            });
-
-            spanPageHeading.innerHTML = "Select A Product";
-            setupPage(2);
-        }
-
-        //pageLoad();
-    </script>
-</body>
+            window.location = "catalogue.html";
+        </script>
+    </body>
 </html>
-

@@ -1,0 +1,746 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title></title>
+        
+        <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        
+        <link href="css/kevromobi.css" type="text/css" rel="stylesheet" />
+        
+        <script type="text/javascript" charset="utf-8" src="cordova-2.2.0.js"></script>
+        <script type="text/javascript" src="js/generalHandlers.js"></script>
+        <script type="text/javascript" src="js/CookieManager.js"></script>
+        <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+        <script type="text/javascript" src="js/jquery.base64.js"></script>
+        <script type="text/javascript" src="js/webtoolkit.base64.js"></script>
+        <script type="text/javascript" charset="utf-8" src="js/fileManager.js"></script>
+        <script type="text/javascript" charset="utf-8" src="js/cataloguesImages.js"></script>
+        <script type="text/javascript" charset="utf-8">
+            
+            
+        </script>
+    </head>
+    <body>
+        <div id="divLoader" class="Loader"><div class="LoaderGIF">Loading, please wait...</div></div>
+
+        <div class="Loader" id="divProgressLoader" style="display:none;">
+            <div class="LoadProgress">
+                <div id="divDownloadProgress" style="background-color: rgb(145, 203, 24); position: absolute; z-index: -1; height: 100%; margin:-5px;"> </div>
+                Downloading <span id="spanCount">0</span> of <span id="spanOfCount">0</span>
+            </div>
+        </div>
+
+        <div class="Header">
+            <table style="width:100%;" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td style="text-align:left; width:20%;"><input type="button" class="btnBack" id="btnBack" value="Back" style="display:none;"/></td>
+                    <td style="text-align:center;"><span id="spanPageHeading" class="spanPageHeading"></span></td>
+                    <td style="text-align:right; width:20%;"><input type="button"  style="display:none;" class="btnChangeCatalogue" id="btnChangeCatalogue" value="Change Catalogue" onclick="setupPage(0);" /></td>
+                </tr>
+            </table>
+        </div>
+        <div class="Banner">
+            <div class="divLogo"></div>
+        </div>
+        
+        <div class="Content">
+            <div id="divCatalogueSelect" style="">
+                
+                <div class="PageHeading">Catalogues</div>
+                <br />
+                
+                <div id="divDownCatalogues">
+                    
+                    <div style="clear:both;"></div>
+                </div>
+                
+                <div id="divDeviceCatalogues">
+                    
+                    <div style="clear:both;"></div>
+                </div>
+            </div>
+            
+            <div id="divListing" style="display:none;">
+                
+            </div>
+            
+            <div id="divDetail" style="display:none;">
+                <div style="float:left; width:35%; margin-right:5%; position: relative;">
+                    <!--Images -->
+                    <div id="divMainImage"></div>
+                    <div id="spanProductImages">
+                        <div id="divImagesContainer">
+
+                        </div>
+                    </div>
+                    <div class="ArrowLeft"> </div>
+                    <div class="ArrowRight"> </div>
+                    <div style="clear:both;"></div>
+                </div>
+                <div style="float:left; width:60%; font-family: helvetica;">
+                    <span id="spanProductName" style="font-size:25px; font-weight:lighter; color: #383c40; display:block; margin: 0 0 28px;"></span>
+                    <span style="font-size: 17px; font-weight:bold; color: #383c40; display: block; margin: 0 0 28px;"><i>Description</i></span>
+                    <span id="spanProductDescription" style="font-size: 12px; font-weight:lighter; color: #383c40;"></span>
+                    <br /><br />
+                    <span id="spanVariants">
+                        
+                        <table>
+                            <tr>
+                                <td style="width:30%;">Size:<br /></td>
+                                <td style="width:30%;">Colour:<br /></td>
+                            </tr>
+                            <tr>
+                                <td style="vertical-align:top; font-size:11px;"><span id="spanVariants2"></span></td>
+                                <td style="vertical-align:top; font-size:11px;"><span id="spanVariants1"></span></td>
+                            </tr>
+                        </table>
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div style="clear:both;"></div>
+        
+        
+        <div class="Footer" id="Footer" style="display:none;">
+            
+            <div class="Filter" style=" color: #F2F0F0; font-family: Helvetica, Arial; font-size: 22px; text-shadow: 2px 3px 3px #333333;">
+                Filter By
+            </div>
+
+            <div class="Seporator"></div>
+
+            <div class="Filter">
+                <select id="ddCollection" onchange="ApplyFilter();"></select>
+                <span id="spanCollection"></span>
+            </div>
+
+            <div class="Seporator"></div>
+            
+            <div class="Filter">
+                <select id="ddColor" onchange="ApplyFilter();">
+                    <option value='0'>Colour</option>
+                    <option value='Black,,Smoke,,Gunmetal'>Black</option>
+                    <option value='Medium Washed,,Dark Rinsed,,Airforce,,Blue,,Dark Indigo,,Denim,,French Blue,,Ice blue,,Iris,,Light Blue,,Mid Blue,,Mountain Blue,,Navy,,New Blue,,Pacific,,Petrol,,Powder Blue,,Royal,,Sapphire,,Sky,,Slate Blue,,Smokey Blue,,Surf Blue,,Teal,,Turquoise,,Vintage Blue'>Blue</option>
+                    <option value='Bottle,,Emerald,,Fern,,Green,,Military,,Moss,,Olive,,Pine,,Safari,,Sage,,Timber'>Bottle</option>
+                    <option value='Brown,,Chocolate,,Fern,,Kalahari,,Khaki,,Military,,Moss,,Mud,,Olive,,Rust,,Safari,,Safari,,Stone,,Tabacco,,Timber'>Brown</option>
+                    <option value='Clear'>Clear</option>
+                    <option value='Glass'>Glass</option>
+                    <option value='Emerald,,Apple,,Green,,Jade,,Lab Green,,Lime,,Mint,,Pale Green,,Parchment,,Vintage Green'>Emerald</option>
+                    <option value='Green,,Apple,,Bottle,,Emerald,,Fern,,Green,,Jade,,Lab  Green,,Lime,,Military,,Mint,,Moss,,Olive,,Pale Green,,Parchment,,Pine,,Safari,,Sage,,Timber,,Vintage Green,,Bamboo'>Green</option>
+                    <option value='Ice Melange,,Dark Grey,,Dove,,Charcoal,,Graphite,,Charcoal heather,,Granite,,Steel Grey,,Grey Blue'>Grey</option>
+                    <option value='Khaki,,Beige,,Camel,,Chocolate,,Cream,,Dessert Tan,,Driftwood,,Ecru,,Fern,,Fossil,,Kalahari,,Military,,Moss,,Mud,,Natural,,Olive,,Pebble,,Pine,,Rust,,Safari,,Sage,,Sand,,Tabacco,,Tan,,Taupe,,Timber'>Khaki</option>
+                    <option value='Lime,,Apple,,Green,,Jade,,Lab Green,,Mint,,Pale Green,,Vintage Green'>Lime</option>
+                    <option value='Maroon,,Burgundy,,Chillie,,Cardinal Red,,Paprika Red'>Maroon</option>
+                    <option value='Orange,,Carrot,,Fluoro,,Peach,,Safety'>Orange</option>
+                    <option value='Pink,,Bright Pink,,Peach'>Pink</option>
+                    <option value='Purple'>Purple</option>
+                    <option value='Red,,Burgundy,,Cardinal Red,,Chillie,,Maroon,,Paprika Red'>Red</option>
+                    <option value='Royal,,Airforce,,Blue,,Dark Indigo,,Denim,,French Blue,,Ice blue,,Iris,,Light Blue,,Mid Blue,,Mountain Blue,,Navy,,New Blue,,Pacific,,Petrol,,Powder Blue,,Royal,,Sapphire,,Sky,,Slate Blue,,Smokey Blue,,Surf Blue,,Teal,,Turquoise,,Vintage Blue'>Royal</option>
+                    <option value='Safety,,Fluoro'>Safety</option>
+                    <option value='Steel,,Silver,,Aluminium'>Silver</option>
+                    <option value='Sky,,Airforce,,Blue,,Dark Indigo,,Denim,,French Blue,,Ice blue,,Iris,,Light Blue,,Mid Blue,,Mountain Blue,,Navy,,New Blue,,Pacific,,Petrol,,Powder Blue,,Royal,,Sapphire,,Sky,,Slate Blue,,Smokey Blue,,Surf Blue,,Teal,,Turquoise,,Vintage Blue'>Sky</option>
+                    <option value='Beige,,Camel,,Cream,,Desert Tan,,Driftwood,,Ecru,,Fern,,Fossil,,Kalahari,,Khaki,,Moss,,Mud,,Natural,,olive,,Pebble,,Pine,,Rust,,Safari,,Sand,,Stone,,Tabacco,,Tan,,Taupe,,Timber'>Stone</option>
+                    <option value='White,,Beige,,Cream,,Ecru,,Natural,,Off White'>White</option>
+                    <option value='Yellow,,Gold,,Butter,,Lemon,,Sunflower,,Safety,,Fluoro'>Yellow</option>
+                </select>
+                <span id="spanColor"></span>
+            </div>
+        </div>
+                    
+        <div id="divProcess" style="display:none ;">
+            <!-- hidden div, dev, download and process-->
+            <div id="MainContent">
+                <ul id="Gallery" class="gallery">
+                </ul>
+            </div>
+            <a href="javascript:addNewItem(window, window.Code.PhotoSwipe);">Add Another Item</a>
+            <textarea id="txtDataTemp" height="500px" width="500px"></textarea>
+            <textarea id="txtImageData" height='500px' width="500px"></textarea>
+            
+            <textarea id="traceText" height='500px' width="500px"></textarea>
+            <input type="hidden" name="" id="hidSelectedCatalogue" value="0" />
+            
+            <input type="button" onclick='tryDownload();' />
+            
+            <input type="button" onclick='tryRead();' />
+        </div>
+        
+        <input type="hidden" id="hidCatalogueID" value="0" />
+        <input type="hidden" id="hidImageTempData" value="" />
+        <input type="hidden" id="hidCount" value="0" />
+        
+        
+        <script type="text/javascript">
+            
+            var divCatalogueSelect = document.getElementById("divCatalogueSelect");
+            var divListing = document.getElementById("divListing");
+            var divDetail = document.getElementById("divDetail");
+            var divProcess = document.getElementById("divProcess");
+            var divMainImage = document.getElementById("divMainImage");
+            var divLoader = document.getElementById("divLoader");
+            var divDownloadProgress = document.getElementById("divDownloadProgress");
+            var divProgressLoader = document.getElementById("divProgressLoader");
+            
+            var spanPageHeading = document.getElementById("spanPageHeading");
+            var traceText = document.getElementById("traceText");
+            var txtDataTemp = document.getElementById("txtDataTemp");
+            var txtImageData = document.getElementById("txtImageData");
+
+            var divDownCatalogues = document.getElementById("divDownCatalogues");
+            var divDeviceCatalogues = document.getElementById("divDeviceCatalogues");
+            var spanDownloadCount = document.getElementById("spanDownloadCount");
+            var spanDownloadOf = document.getElementById("spanDownloadOf");
+            var spanCount = document.getElementById("spanCount");
+            var spanOfCount = document.getElementById("spanOfCount");
+            var hidCatalogueID = document.getElementById("hidCatalogueID");
+            var hidImageTempData = document.getElementById("hidCatalogueID");
+            var hidCount = document.getElementById("hidCount");
+            
+            var divImagesContainer = document.getElementById("divImagesContainer");
+            var spanProductName = document.getElementById("spanProductName");
+            var spanProductDescription = document.getElementById("spanProductDescription");
+            var spanVariants = document.getElementById("spanVariants");
+            var spanVariants1 = document.getElementById("spanVariants1");
+            var spanVariants2 = document.getElementById("spanVariants2");
+
+            var ddCollection = document.getElementById("ddCollection");
+            var spanCollection = document.getElementById("spanCollection");
+
+            var ddColor = document.getElementById("ddColor");
+            var spanColor = document.getElementById("spanColor");
+
+            
+            var siteURL = "http://kevro.liquidbox.co.za/";
+            var catalogueStorage = "catalogueStorage";
+            var imageStorage = "imageStorage";
+            
+            var currentCatalogueID = 0;
+            var currentDownloadPage = 0;
+            var currentPageCount = 0;
+            var iDownloadCount = 0;
+            
+            var sKey;
+            
+            function loadCatalogues() {
+                document.getElementById("divLoader").style.display = "block";
+                WSCall(loadCataloguesComplete, "GetCatalogues", []);
+            }
+
+            function loadCataloguesComplete(result, data) {
+                try {
+                    if (result) {
+                        var sResult = getTagValue(data, "result");
+                        if (sResult == "1") {
+                            var row = 0;
+
+                            var sCatalogueHTML = "";
+                            
+                            
+                            $(data).find("catalogue").each(function () {
+                                var catalogue = catalogueLoad($(this).find("CatalogueID").text());
+                                
+                                sCatalogueHTML += "<div class='productItem'>"
+                                sCatalogueHTML += "  <div class='categoryImage'><img src='data:image/png;base64," + $(this).find("PortraitImage").text() +  "' /></div>";
+                                sCatalogueHTML += "  <div class='categoryName'>" + $(this).find("CatalogueName").text();
+                                sCatalogueHTML += "(" + getMBValue($(this).find("FileSize").text()) + ")<br />";
+
+                                                           
+                                                           var catalogue = catalogueLoad($(this).find("CatalogueID").text());
+                                                           
+                                if (catalogue == undefined || catalogue == ""){
+                                    sCatalogueHTML += "<input type='button' onclick=\"downloadCataloguePages(" + $(this).find("CatalogueID").text() + ", ";
+                                    sCatalogueHTML += "'" + $(this).find("CatalogueName").text() + "', ";
+                                    sCatalogueHTML += "'" + $(this).find("FileCount").text() + "', ";
+                                    sCatalogueHTML += "'" + $(this).find("Icon").text() + "', ";
+                                    sCatalogueHTML += "'" + $(this).find("PortraitImage").text() + "',  ";
+                                    sCatalogueHTML += "'" + $(this).find("LandscapeImage").text() + "'";
+                                    sCatalogueHTML += ");\" value='Download Now' />";
+                                }else{
+                                    sCatalogueHTML += "<input type='button' value='View Catalogue' onclick='loadCategoryListing(" + $(this).find("CatalogueID").text() + ");'/>&nbsp;&nbsp;";
+                                    sCatalogueHTML += "<input type='button' value='Delete' onclick='deleteCatalogue(\"" + $(this).find("CatalogueID").text() + "\");'/>";
+                                }
+                                sCatalogueHTML += "  <div style='clear:both;'></div></div>";
+                                sCatalogueHTML += "</div>";
+                            });
+
+                            divDownCatalogues.innerHTML = sCatalogueHTML;
+                            divLoader.style.display = "none";
+                        }
+                        else {
+                            handleError("getProductsComplete", getTagValue(data, "data"), "issue in data processing");
+                            offlineLoad();
+                        }
+                    }
+                    else {
+                        handleError("getProductsComplete", "", "getProductsComplete return is empty");
+                        offlineLoad();
+                    }
+                }
+                catch (ex) {
+                    handleError("getProductsComplete", ex, "getProductsComplete no return");
+                    offlineLoad();
+                }
+            }
+
+            function offlineLoad() {
+                try{
+                var sCatalogueHTML = "";
+                        var catalogueArray = catalogueLoad(0);
+                catalogueArray = catalogueArray.split("|");
+
+                for (i = 0; i < catalogueArray.length; i++) {
+                    var detail = catalogueArray[i];
+
+                    detail = detail.split(",");
+
+                    if (detail[1] !== undefined){
+                        sCatalogueHTML += "<div class='productItem'>"
+                        sCatalogueHTML += "  <div class='categoryImage'><img src='data:image/png;base64," + detail[2] + "' /></div>";
+                        sCatalogueHTML += "  <div class='categoryName'>" + detail[1];
+
+                        sCatalogueHTML += "<input type='button' value='View Catalogue' onclick='loadCategoryListing(" + detail[0] + ");'/>&nbsp;&nbsp;";
+                        sCatalogueHTML += "<input type='button' value='Delete' onclick='deleteCatalogue(\"" + detail[0] + "\");'/>";
+
+                        sCatalogueHTML += "  <div style='clear:both;'></div></div>";
+                        sCatalogueHTML += "</div>";
+                    }
+                }
+                    
+                    
+                    divDownCatalogues.innerHTML = sCatalogueHTML;
+                divLoader.style.display = "none";
+                } catch (ex){
+                    divDownCatalogues.innerHTML = "You currently have no downloaded catalogues, please go online to be able to download the latest catalogues.";
+                    
+                    divLoader.style.display = "none";
+                    handleError(ex, ex, ex);
+                }
+            }
+
+            function deleteCatalogue(catalogueID){
+                if (confirm("Are you sure you would like to delete this catalogue?")){
+                    hidCatalogueID.value = catalogueID;
+                    catalogueDelete(hidCatalogueID.value);
+                    
+                    //deleteCatalogueComplete();
+                    deleteFile("catalogue" + catalogueID + ".xml", deleteCatalogueComplete);
+                }
+            }
+          
+            function deleteCatalogueComplete() {
+                
+                alert("Catalogue has been deleted.");
+                
+                loadCatalogues();
+            }
+            //*****************************************
+            //<Download catalogue data>
+            // catalogue is downloaded as a static xml call to the server. this file is then stored on the local
+            // system and local storage contains a array listing of the currently downloaded catalogues.
+            
+            function downloadCataloguePages(CatalogueID, CatalogueName, FileCount, Icon, PortraitImage, LandscapeImage) {
+                try {
+                    // create catalogue entry
+                    
+                    spanOfCount.innerHTML = (FileCount - 1);
+                    divProgressLoader.style.display = "block";
+
+                    if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+                        xmlhttp = new XMLHttpRequest();
+                    }
+                    else {// code for IE6, IE5
+                        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                    xmlhttp.onreadystatechange = function () {
+                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+
+                            // on download call fon download call file system to save fileile system to save file
+                            txtDataTemp.value = xmlhttp.responseText;
+                            
+                            hidCatalogueID.value = CatalogueID;
+                            
+                            catalogueSave(CatalogueID, CatalogueName, PortraitImage);
+                            createFile("catalogue" + hidCatalogueID.value + ".xml", txtDataTemp.value, [], saveSuccess, true);
+                        }
+                    }
+
+                    // download link for selected catalogue
+                    xmlhttp.open("GET", siteURL + "/admin/uploads/catalogues/" + CatalogueID + ".xml?t=" + new Date(), true);
+                    xmlhttp.send();
+                    
+                } catch (ex) {
+                    handleError("downloadCataloguePages", ex, "failed to download:");
+                }
+            }
+            
+            function saveSuccess(vars){
+                //runDownload();
+                downloadImages();
+            }
+            
+            function downloadImages() {
+                try {
+                    // product images
+                    var sXML = txtDataTemp.value;
+                    var iCount = 0;
+
+                    if (spanOfCount.innerHTML == spanCount.innerHTML) { divProgressLoader.style.display = "none"; alert("Download has completed!"); loadCatalogues(); a = b; }
+
+                    $(sXML).find("product").each(function () {
+                        // check if image exists
+                        iCount += 1;
+                        if (iCount > parseInt(spanCount.innerHTML)) {
+                            spanCount.innerHTML = iCount;
+
+                            divDownloadProgress.style.width = ((parseInt(spanCount.innerHTML) / parseInt(spanOfCount.innerHTML)) * 100) + "%";
+
+                            WSCall(downloadImageComplete, "DownloadImage", [["ProductID", $(this).find("productid").text()]]);
+                            a = b;
+                        }
+                    });
+                } catch (ex) {
+                    // operation breaks delibirately
+                }
+            }
+
+            function downloadImageComplete(result, data) {
+                try {
+                    if (result) {
+                        var sResult = getTagValue(data, "result");
+                        if (sResult == "1") {
+                            var row = 0;
+                            txtImageData.value = data;
+                            createFile("product" + getTagValue(data, "productid") + ".xml", txtImageData.value, [], downloadImages);
+                        }
+                        else {
+                            handleError("getProductsComplete", getTagValue(data, "data"), "issue in data processing");
+                        }
+                    }
+                    else {
+                        handleError("getProductsComplete", "", "getProductsComplete return is empty");
+                    }
+                }
+                catch (ex) {
+                    handleError("getProductsComplete", ex, "getProductsComplete no return");
+                }
+            }
+            
+            //</Download catalogue data>
+            //*****************************************
+
+            //*****************************************
+            //<Load catalogue data>
+            // catalogue data is accessed on a locally stored file called "catalogue" + catalogueid + ".xml".
+            // this data is retrieved and placed in a text area for easy access and to be viewable in case of debugging.
+            
+            function loadCategoryListing(catalogueID) {
+                // set local var for current catalogue
+                hidCatalogueID.value = catalogueID;
+                divLoader.style.display = "block";
+                btnBack.onclick = (function (){ setupPage(0); });
+
+                // get files system and call back access function
+                var t = setTimeout("callReader()", 50);
+            }
+
+            function callReader(){
+                readFile("catalogue" + hidCatalogueID.value + ".xml", "", loadCategoryComplete, "", false);
+            }
+            
+            function loadCategoryComplete(fileData){
+                try{
+                    txtDataTemp.value = fileData;
+                    var sHTML = "";
+
+                    $(txtDataTemp.value).find("productcategory").each(function () {
+                        // check if image exists
+
+                        sHTML += "<div class='productItem' onclick='listProducts(" + $(this).find("productcategoryid").text() + ");'>";
+                        sHTML += "  <div class='categoryImage'><img src='data:image/jpg;base64," + $(this).find("productcategoryimage").text() + "' /></div>";
+                        sHTML += "  <div class='categoryName'>" + $(this).find("productcategoryname").text() + "</div>";
+                        sHTML += "</div>";
+
+                    });
+                
+                    divListing.innerHTML = sHTML;
+                    spanPageHeading.innerHTML = "Select A Catagory";
+                    setupPage(1);
+                    divLoader.style.display = "none";
+                }catch (ex){
+                    handleError("loadCategoryComplete", ex, "");
+                }
+            }
+            
+            function listProducts(catagoryID) {
+                divLoader.style.display = "block";
+                try{
+                    btnBack.onclick = (function (){var i = hidCatalogueID.value; loadCategoryListing(i); document.getElementById("Footer").style.display = 'none';});
+                    setTimeout(function (){
+                var sXML = txtDataTemp.value;
+                
+                var sHTML = "";
+                divListing.innerHTML = "";
+                    
+                $(sXML).find("productcategory").each(function () {
+                    // check if image exists
+                    if ($(this).find("productcategoryid").text() == catagoryID) {
+                                                     
+                        spanPageHeading.innerHTML = $(this).find("productcategoryname").text();
+                                                     
+                            $(this).find("product").each(function () {
+                                sHTML += "<div class='productItem' onclick='openProduct(" + $(this).find("productid").text() + ");'>"
+                                sHTML += "  <div class='categoryImage'><img src='data:image/jpg;base64," + $(this).find("thumb").text() + "' /></div>";
+                                sHTML += "  <div class='categoryName'>" + $(this).find("productname").text() + "</div>";
+                                sHTML += "</div>";
+                                                         
+                                divListing.innerHTML += sHTML;
+
+                                sHTML = "";
+                            });
+                        setupFilter(this);
+                    }
+                });
+                    
+                    divListing.innerHTML += "<div style='clear:both;'>&nbsp;</div>"
+                setupPage(1);
+                
+                divLoader.style.display = "none";
+                               }, 50);
+                    
+                }catch (ex){
+                    //alert(ex);
+                }
+            }
+
+            function setupFilter(item) {
+                document.getElementById("Footer").style.display = 'block';
+                $('#ddCollection').empty();
+
+                var option = document.createElement('option');
+                jQuery(option).appendTo('#ddCollection');
+                option.text = "All Collections";
+                option.value = "0";
+
+                $(item).find("productgroup").each(function () {
+                    var option = document.createElement('option');
+                    jQuery(option).appendTo('#ddCollection');
+                    option.text = $(this).find("productgroupname").text();
+                    option.value = $(this).find("productgroupid").text();
+                });
+
+                spanCollection.innerHTML = ddCollection.options[ddCollection.selectedIndex].text;
+                spanColor.innerHTML = ddColor.options[ddColor.selectedIndex].text;
+            }
+
+            function ApplyFilter() {
+
+                spanCollection.innerHTML = ddCollection.options[ddCollection.selectedIndex].text;
+                spanColor.innerHTML = ddColor.options[ddColor.selectedIndex].text;
+                
+                spanPageHeading.innerHTML = "Filter View";
+
+                divLoader.style.display = "block";
+                divListing.innerHTML = "";
+                setTimeout(function () {
+                    var sXML = txtDataTemp.value;
+
+                    var sHTML = "";
+
+                    $(sXML).find("productgroup").each(function () {
+                        // check if image exists
+                        if ($(this).find("productgroupid").text() == ddCollection.options[ddCollection.selectedIndex].value || ddCollection.options[ddCollection.selectedIndex].value == 0) {
+
+                            //spanPageHeading.innerHTML = $(this).find("productcategoryname").text();
+
+                            $(this).find("product").each(function () {
+
+                                var bAdd = false;
+
+                                if (ddColor.options[ddColor.selectedIndex].value == 0) {
+                                    bAdd = true;
+                                } else {
+                                    var sVarKey = ddColor.options[ddColor.selectedIndex].value;
+
+                                    sVarKey = sVarKey.toLowerCase();
+
+                                    $(this).find("productvariant").each(function () {
+
+                                        var variants = $(this).find("variant").text();
+                                        variants = variants.toLowerCase();
+                                        variants = variants.split("/");
+
+                                        for (i = 0; i < variants.length; i++) {
+                                            if (sVarKey.indexOf(variants[i]) > -1) {
+                                                bAdd = true;
+                                            }
+                                        }
+                                    });
+                                }
+
+                                if (bAdd == true) {
+                                    sHTML += "<div class='productItem' onclick='openProduct(" + $(this).find("productid").text() + ");'>"
+                                    sHTML += "  <div class='categoryImage'><img src='data:image/jpg;base64," + $(this).find("thumb").text() + "' /></div>";
+                                    sHTML += "  <div class='categoryName'>" + $(this).find("productname").text() + "</div>";
+                                    sHTML += "</div>"
+                                    divListing.innerHTML += sHTML;
+                                }
+
+                                sHTML = "";
+                            });
+
+                            //setupFilter(this);
+                        }
+                    });
+
+                    if (divListing.innerHTML.length < 1) {
+                        divListing.innerHTML = "<div class='FilterFail'>No matching products found.</div>"
+                    }
+                           divListing.innerHTML += "<div style='clear:both;'>&nbsp;</div>"
+
+                    divLoader.style.display = "none";
+
+                }, 50);
+
+            }
+            
+            function openProduct(productID) {
+
+                btnBack.onclick = (function (){
+                                   setupPage(1);
+                                   document.getElementById("Footer").style.display = 'block';
+                                   btnBack.onclick = (function (){var i = hidCatalogueID.value; loadCategoryListing(i); document.getElementById("Footer").style.display = 'none';});
+                                   });
+                
+                document.getElementById("divLoader").style.display = "block";
+                setTimeout(function() {
+                var sXML = txtDataTemp.value;
+                
+                var sHTML = "";
+                
+                var sVariant1 = "";
+                var sVariant2 = "";
+                
+                
+                           readFile("product" + productID + ".xml", "", loadImages, "", false);
+                           spanVariants1.innerHTML = "";
+                           spanVariants2.innerHTML = "";
+                
+                $(sXML).find("product").each(function () {
+                    // check if image exists
+                    if ($(this).find("productid").text() == productID) {
+                        spanProductName.innerHTML = $(this).find("productname").text();
+                        spanProductDescription.innerHTML = $(this).find("description").text();
+
+                        spanPageHeading.innerHTML = $(this).find("productname").text();
+                                             
+                                             
+                        $(this).find("productvariant").each(function () {
+                            
+                            if (spanVariants1.innerHTML.indexOf($(this).find("variant").text()) == -1) {
+                                spanVariants1.innerHTML += "&nbsp;&nbsp;" + $(this).find("variant").text() + "<br />";
+                            }
+                                                             
+                            if (spanVariants2.innerHTML.indexOf($(this).find("variant2").text()) == -1) {
+                                spanVariants2.innerHTML += "&nbsp;&nbsp;" + $(this).find("variant2").text() + "<br />";
+                            }
+                        });
+
+                        //spanVariants.innerHTML = sVariant2;
+                    }
+                });
+                
+                setupPage(2);
+                           }, 100)
+            }
+                         
+            function loadImages(data) {
+                divImagesContainer.innerHTML = "";
+                txtImageData.value = data;
+
+                $(txtImageData.value).find("productimage").each(function () {
+                    divImagesContainer.innerHTML += "<div class=\"ThumbView\"><img src='data:image/jpg;base64," + $(this).find("data").text() + "' onclick='changeMain(this);' /></div>";
+
+                    if ($(this).find("main").text() == "True") {
+                        divMainImage.innerHTML = "<img src='data:image/jpg;base64," + $(this).find("data").text() + "' />";
+                    }
+                });
+
+                divImagesContainer.style.width = (122 * document.getElementsByClassName("ThumbView").length) + "px";
+
+                document.getElementById("divLoader").style.display = "none";
+            }
+            
+            function changeMain(control) {
+                divMainImage.innerHTML = "<img src='" + control.src + "' />";
+            }
+            
+            
+            //</Load catalogue data>
+            //*****************************************
+
+            function setupPage(page) {
+                divCatalogueSelect.style.display = "none";
+                divListing.style.display = "none";
+                divDetail.style.display = "none";
+                
+                if (page == 0) {
+                    divCatalogueSelect.style.display = "";
+                    spanPageHeading.innerHTML = "Select A Catalogue";
+                    
+                    btnBack.style.display = 'none';
+                    btnChangeCatalogue.style.display = 'none';
+                    document.getElementById("Footer").style.display = 'none';
+                    
+                    loadCatalogues();
+                } else if (page == 1) {
+                    divListing.style.display = "";
+                    btnBack.style.display = '';
+                    btnChangeCatalogue.style.display = '';
+                } else if (page === 2) {
+                    document.getElementById("Footer").style.display = 'none';
+                    divDetail.style.display = "";
+                    btnBack.style.display = '';
+                    btnChangeCatalogue.style.display = '';
+                }
+            }
+            
+            function pageLoad() {
+                //check for downloaded catalogues
+
+                spanColor.innerHTML = ddColor.options[ddColor.selectedIndex].text;
+
+                loadCatalogues();
+
+                //divLoader.style.display = "none";
+            }
+            
+            function getMBValue(input){
+                var sReturn =  parseInt(input) / 1024 / 1024;
+                sReturn = roundNumber(sReturn, 2);
+                return sReturn + "mb";
+            }
+            
+            function roundNumber(num, dec) {
+                
+                if (num == 0) { num = 0.001; }
+                
+                num = parseFloat(num);
+                
+                var result = num.toFixed(dec);
+                
+                result = result.substring(0, result.indexOf(".") + 3 );
+                return result;
+            }
+            
+            function fail(evt) {
+                alert("filesent error:" + evt.target.error.value);
+            }
+            
+            pageLoad();
+        </script>
+    </body>
+</html>
+

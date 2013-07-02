@@ -1,0 +1,191 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+        
+    <link href="css/kevromobi.css" type="text/css" rel="stylesheet" />
+        
+    <script type="text/javascript" charset="utf-8" src="cordova-2.2.0.js"></script>
+    <script type="text/javascript" src="js/generalHandlers.js"></script>
+    <script type="text/javascript" src="js/CookieManager.js"></script>
+    <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+    <script type="text/javascript" src="js/jquery.base64.js"></script>
+    <script type="text/javascript" src="js/webtoolkit.base64.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/fileManager.js"></script>
+    <script type="text/javascript" charset="utf-8" src="js/cataloguesImages.js"></script>
+</head>
+<body>
+    <div class="Header">
+        <table style="width: 100%;" cellpadding="0" cellspacing="0">
+            <tr>
+                <td style="text-align: left; width: 20%;">
+                    <input type="button" class="btnBack" id="btnBack" value="Back" style="display: none;" /></td>
+                <td style="text-align: center;"><span id="spanPageHeading" class="spanPageHeading"></span></td>
+                <td style="text-align: right; width: 20%;">
+                    <input type="button" style="display: none;" class="btnChangeCatalogue" id="btnChangeCatalogue" value="Change Catalogue" onclick="setupPage(0);" /></td>
+            </tr>
+        </table>
+    </div>
+    <div class="Banner">
+        <div class="divLogo"></div>
+    </div>
+
+    <div class="Content">
+        <div id="divCatalogueSelect" style="">
+
+            <div class="PageHeading">Catalogues</div>
+            <br />
+
+            <div id="divDownCatalogues">
+                <div class='productItem'>
+                    <div class='categoryImage'><img src='http://www.kevro.co.za/Admin/Uploads/Catalogues/Images/Catalogue/5_port.png' /></div>
+                    <div class='categoryName'>My Test Catalogue<br />(30 Mb)
+                        <input type='button' value='Download Now' />
+                        <div style='clear:both;'></div>
+                    </div>
+                </div>
+                <div class='productItem'>
+                    <div class='categoryImage'><img src='http://www.kevro.co.za/Admin/Uploads/Catalogues/Images/Catalogue/5_port.png' /></div>
+                    <div class='categoryName'>My Test Catalogue<br />(30 Mb)
+                        <input type='button' value='Download Now' />
+                        <div style='clear:both;'></div>
+                    </div>
+                </div>
+                <div class='productItem'>
+                    <div class='categoryImage'><img src='http://www.kevro.co.za/Admin/Uploads/Catalogues/Images/Catalogue/5_port.png' /></div>
+                    <div class='categoryName'>My Test Catalogue<br />(30 Mb)
+                        <input type='button' value='Download Now' />
+                        <div style='clear:both;'></div>
+                    </div>
+                </div>
+                <div class='productItem'>
+                    <div class='categoryImage'><img src='http://www.kevro.co.za/Admin/Uploads/Catalogues/Images/Catalogue/5_port.png' /></div>
+                    <div class='categoryName'>My Test Catalogue<br />(30 Mb)
+                        <input type='button' value='Download Now' />
+                        <div style='clear:both;'></div>
+                    </div>
+                </div>
+                <div class='productItem'>
+                    <div class='categoryImage'><img src='http://www.kevro.co.za/Admin/Uploads/Catalogues/Images/Catalogue/5_port.png' /></div>
+                    <div class='categoryName'>My Test Catalogue<br />(30 Mb)
+                        <input type='button' value='Download Now' />
+                        <div style='clear:both;'></div>
+                    </div>
+                </div>
+                <div class='productItem'>
+                    <div class='categoryImage'><img src='http://www.kevro.co.za/Admin/Uploads/Catalogues/Images/Catalogue/5_port.png' /></div>
+                    <div class='categoryName'>My Test Catalogue<br />(30 Mb)
+                        <input type='button' value='Download Now' />
+                        <div style='clear:both;'></div>
+                    </div>
+                </div>
+                <div class='productItem'>
+                    <div class='categoryImage'><img src='http://www.kevro.co.za/Admin/Uploads/Catalogues/Images/Catalogue/5_port.png' /></div>
+                    <div class='categoryName'>My Test Catalogue<br />(30 Mb)
+                        <input type='button' value='Download Now' />
+                        <div style='clear:both;'></div>
+                    </div>
+                </div>
+                <div class='productItem'>
+                    <div class='categoryImage'><img src='http://www.kevro.co.za/Admin/Uploads/Catalogues/Images/Catalogue/5_port.png' /></div>
+                    <div class='categoryName'>My Test Catalogue<br />(30 Mb)
+                        <input type='button' value='Download Now' />
+                        <div style='clear:both;'></div>
+                    </div>
+                </div>
+                <div style="clear: both;"></div>
+            </div>
+        </div>
+
+        <div id="divListing" style="display: none;">
+        </div>
+
+        <div id="divDetail" style="display: none;">
+            <div class="divDetailImage">
+                <!--Images -->
+                <div id="divMainImage"></div>
+                <div id="spanProductImages">
+                    <div id="divImagesContainer">
+                    </div>
+                </div>
+                <div class="ArrowLeft"></div>
+                <div class="ArrowRight"></div>
+                <div style="clear: both;"></div>
+            </div>
+            <div class="divDetailProduct">
+                <span id="spanProductName" style="font-size: 25px; font-weight: lighter; color: #383c40; display: block; margin: 0 0 28px;"></span>
+                <span style="font-size: 17px; font-weight: bold; color: #383c40; display: block; margin: 0 0 28px;"><i>Description</i></span>
+                <span id="spanProductDescription" style="font-size: 12px; font-weight: lighter; color: #383c40;"></span>
+                <br />
+                <br />
+                <span id="spanVariants">
+
+                    <table>
+                        <tr>
+                            <td style="width: 30%;">Size:<br />
+                            </td>
+                            <td style="width: 30%;">Colour:<br />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="vertical-align: top; font-size: 11px;"><span id="spanVariants2"></span></td>
+                            <td style="vertical-align: top; font-size: 11px;"><span id="spanVariants1"></span></td>
+                        </tr>
+                    </table>
+
+                </span>
+            </div>
+        </div>
+    </div>
+    <div style="clear: both;"></div>
+
+
+    <div class="Footer" id="Footer" style="display: none;">
+
+        <div class="Filter" style="color: #F2F0F0; font-family: Helvetica, Arial; font-size: 22px; text-shadow: 2px 3px 3px #333333;">
+            Filter By
+        </div>
+
+        <div class="Seporator"></div>
+
+        <div class="Filter">
+            <select id="ddCollection" onchange="ApplyFilter();"></select>
+            <span id="spanCollection"></span>
+        </div>
+
+        <div class="Seporator"></div>
+
+        <div class="Filter">
+            <select id="ddColor" onchange="ApplyFilter();">
+                <option value='0'>Colour</option>
+                <option value='Black,,Smoke,,Gunmetal'>Black</option>
+                <option value='Medium Washed,,Dark Rinsed,,Airforce,,Blue,,Dark Indigo,,Denim,,French Blue,,Ice blue,,Iris,,Light Blue,,Mid Blue,,Mountain Blue,,Navy,,New Blue,,Pacific,,Petrol,,Powder Blue,,Royal,,Sapphire,,Sky,,Slate Blue,,Smokey Blue,,Surf Blue,,Teal,,Turquoise,,Vintage Blue'>Blue</option>
+                <option value='Bottle,,Emerald,,Fern,,Green,,Military,,Moss,,Olive,,Pine,,Safari,,Sage,,Timber'>Bottle</option>
+                <option value='Brown,,Chocolate,,Fern,,Kalahari,,Khaki,,Military,,Moss,,Mud,,Olive,,Rust,,Safari,,Safari,,Stone,,Tabacco,,Timber'>Brown</option>
+                <option value='Clear'>Clear</option>
+                <option value='Glass'>Glass</option>
+                <option value='Emerald,,Apple,,Green,,Jade,,Lab Green,,Lime,,Mint,,Pale Green,,Parchment,,Vintage Green'>Emerald</option>
+                <option value='Green,,Apple,,Bottle,,Emerald,,Fern,,Green,,Jade,,Lab  Green,,Lime,,Military,,Mint,,Moss,,Olive,,Pale Green,,Parchment,,Pine,,Safari,,Sage,,Timber,,Vintage Green,,Bamboo'>Green</option>
+                <option value='Ice Melange,,Dark Grey,,Dove,,Charcoal,,Graphite,,Charcoal heather,,Granite,,Steel Grey,,Grey Blue'>Grey</option>
+                <option value='Khaki,,Beige,,Camel,,Chocolate,,Cream,,Dessert Tan,,Driftwood,,Ecru,,Fern,,Fossil,,Kalahari,,Military,,Moss,,Mud,,Natural,,Olive,,Pebble,,Pine,,Rust,,Safari,,Sage,,Sand,,Tabacco,,Tan,,Taupe,,Timber'>Khaki</option>
+                <option value='Lime,,Apple,,Green,,Jade,,Lab Green,,Mint,,Pale Green,,Vintage Green'>Lime</option>
+                <option value='Maroon,,Burgundy,,Chillie,,Cardinal Red,,Paprika Red'>Maroon</option>
+                <option value='Orange,,Carrot,,Fluoro,,Peach,,Safety'>Orange</option>
+                <option value='Pink,,Bright Pink,,Peach'>Pink</option>
+                <option value='Purple'>Purple</option>
+                <option value='Red,,Burgundy,,Cardinal Red,,Chillie,,Maroon,,Paprika Red'>Red</option>
+                <option value='Royal,,Airforce,,Blue,,Dark Indigo,,Denim,,French Blue,,Ice blue,,Iris,,Light Blue,,Mid Blue,,Mountain Blue,,Navy,,New Blue,,Pacific,,Petrol,,Powder Blue,,Royal,,Sapphire,,Sky,,Slate Blue,,Smokey Blue,,Surf Blue,,Teal,,Turquoise,,Vintage Blue'>Royal</option>
+                <option value='Safety,,Fluoro'>Safety</option>
+                <option value='Steel,,Silver,,Aluminium'>Silver</option>
+                <option value='Sky,,Airforce,,Blue,,Dark Indigo,,Denim,,French Blue,,Ice blue,,Iris,,Light Blue,,Mid Blue,,Mountain Blue,,Navy,,New Blue,,Pacific,,Petrol,,Powder Blue,,Royal,,Sapphire,,Sky,,Slate Blue,,Smokey Blue,,Surf Blue,,Teal,,Turquoise,,Vintage Blue'>Sky</option>
+                <option value='Beige,,Camel,,Cream,,Desert Tan,,Driftwood,,Ecru,,Fern,,Fossil,,Kalahari,,Khaki,,Moss,,Mud,,Natural,,olive,,Pebble,,Pine,,Rust,,Safari,,Sand,,Stone,,Tabacco,,Tan,,Taupe,,Timber'>Stone</option>
+                <option value='White,,Beige,,Cream,,Ecru,,Natural,,Off White'>White</option>
+                <option value='Yellow,,Gold,,Butter,,Lemon,,Sunflower,,Safety,,Fluoro'>Yellow</option>
+            </select>
+            <span id="spanColor"></span>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,4 +1,4 @@
-﻿// ********** General Handling ***************
+// ********** General Handling ***************
 
 var ServiceURL = "http://kevro.liquidbox.co.za/services/MobiApp.asmx";
 //var ServiceURL = "http://www.kevro.co.za/services/PresentationService.asmx";
@@ -28,9 +28,11 @@ function WSCall(callBackFunction, ServerFunction, Vars, LoaderElement) {
         "</soap12:Envelope>";
 
         //alert(soap);
-
+        
+        var newServiceURL = ServiceURL + "?noCache=" + (new Date)
+        
         var webServiceCall = new WebSvc();
-        webServiceCall.CallWebService(ServiceURL, soap, callBackFunction);
+        webServiceCall.CallWebService(newServiceURL, soap, callBackFunction);
 
     } catch (ex) {
         handleError(ServerFunction, ex, ServerFunction + " call build error");
@@ -38,7 +40,7 @@ function WSCall(callBackFunction, ServerFunction, Vars, LoaderElement) {
 }
 
 function handleError(functionName, errorMessage, positionRef) {
-    alert("Error in " + functionName + "() at " + positionRef + ", error message:" + errorMessage);
+    //alert("Error in " + functionName + "() at " + positionRef + ", error message:" + errorMessage);
 }
 
 function getTagValue(inputStr, tagName) {

@@ -1,10 +1,106 @@
-﻿body {
+body {
     height:100%;
     width:100%;
     margin:0;
     padding:0;
     background-color:#fff;
     font-family:Arial;
+}
+
+@media (min-width: 941px) and (max-width: 3000px){
+    .catalogueTopLevel {
+        border-radius: 5px 5px 5px 5px;
+        box-shadow: 1px 0 3px 0 #CCCCCC;
+        float: left;
+        margin: 0 1%;
+        padding: 1%;
+        width: 20%;
+    }
+
+    .productItem {
+        border-radius: 8px 8px 8px 8px;
+        box-shadow: 1px 1px 2px 0 #666666;
+        float: left;
+        min-height: 197px;
+        margin: 10px 2.4%;
+        padding: 0 0.5%;
+        text-align: center;
+        width: 19%;
+    }
+
+    .Banner {
+        background-color: #D6D5D5;
+        background-image: url("banner-bg.png");
+        background-position: right center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        height: 55px;
+        margin-top: -2px;
+        padding: 25px 6%;
+    }
+
+    .divDetailImage{
+        width: 100%; 
+        margin-right: 5%; 
+        position: relative;
+    }
+
+    .divDetailProduct{
+        width: 100%; 
+        font-family: helvetica;
+    }
+}
+
+@media  (max-width: 940px){
+    .catalogueTopLevel {
+        border-radius: 5px 5px 5px 5px;
+        box-shadow: 1px 0 3px 0 #CCCCCC;
+        float: left;
+        margin: 0 1%;
+        padding: 1%;
+        width: 33%;
+    }
+
+    .productItem {
+        border-radius: 8px 8px 8px 8px;
+        box-shadow: 1px 1px 2px 0 #666666;
+        float: left;
+        margin: 10px 2.4%;
+        min-height: 197px;
+        padding: 0 0.3%;
+        text-align: center;
+        width: 44.5%;
+    }
+
+    .Banner {
+        background-color: #D6D5D5;
+        background-position: right center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        height: 55px;
+        margin-top: -2px;
+        padding: 25px 6%;
+    }
+    
+    .divDetailImage{
+        float: left; 
+        width: 35%; 
+        margin-right: 5%; 
+        position: relative;
+    }
+
+    .divDetailProduct{
+        float: left; 
+        width: 60%; 
+        font-family: helvetica;
+    }
+}
+
+.Splash {
+    background-image:url(SplashBIG_r1_c2.png);
+    background-size:cover;
+    height:100%;
+    width:100%;
 }
 
 .Header {
@@ -19,17 +115,6 @@
         font-size:20px;
     }
 
-.Banner {
-    background-color: #D6D5D5;
-    background-image: url("banner-bg.png");
-    background-position: right center;
-    background-repeat: no-repeat;
-    background-size: contain;
-    height: 55px;
-    margin-top: -2px;
-    padding: 25px 6%;
-}
-
     .Banner .divLogo {
         background-image: url("logo.png");
         background-position: left center;
@@ -39,7 +124,7 @@
     }
 
 .Content {
-   padding: 20px 5%;
+   padding: 20px 5% 90px;
 }
 
     .Content .PageHeading {
@@ -59,12 +144,56 @@
 .Footer {
     background-image: url(footer-bg.png);
     background-size:contain;
-    width:100%;
-    padding-top:16px;
+    width:90%;
+    padding: 16px 5% 0;
+    position:fixed;
+    bottom:0;
     height:57px;
 }
 
-.btnBack {
+    .Footer div {
+        float:left;
+    }
+
+    .Footer .Seporator {
+        border-left: 1px solid #65696E;
+        border-right: 1px solid #373A3E;
+        height: 72px;
+        margin-top: -15px;
+    }
+
+    .Footer span {
+        background-color: #FFFFFF;
+        background-image: url("dropdown-bg.png");
+        background-position: right center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        border: 1px solid #797E84;
+        border-radius: 10px 10px 10px 10px;
+        box-shadow: 1px 1px 2px 0 #333333;
+        color: #797E84;
+        display: block;
+        font-size: 12px;
+        height: 14px;
+        padding: 5px 38px 5px 5px;
+        width: 161px;
+        text-align: center;
+    }
+
+    
+    .Footer select {
+        height: 27px;
+        opacity: 0;
+        position: absolute;
+        width: 208px;
+    }
+
+    .Footer .Filter  {
+        padding: 9px 45px;
+    }
+
+
+.btnBack[type="button"] {
     background-color: transparent;
     background-image: url("btn-back.png");
     background-size: contain;
@@ -79,7 +208,7 @@
     width: 83px;
 }
 
-.btnChangeCatalogue{
+.btnChangeCatalogue[type="button"]{
     background-color: transparent;
     background-image: url("btn-green.png");
     background-size: contain;
@@ -97,16 +226,125 @@
 }
 
 input[type="button"] {
-    cursor:pointer;
+    background-color: transparent;
+    background-image: url("btn-bg.png");
+    background-size: contain;
+    border: medium none;
+    border-radius: 5px 5px 5px 5px;
+    /*box-shadow: 0 0 3px 0 #333333;*/
+    color: #FFFFFF;
+    cursor: pointer;
+    font-size: 13px;
+    padding: 6px;
+}
+
+.categoryImage {
+    padding: 15px;
+}
+
+.categoryImage > img {
+    height: 120px;
+    width: 120px;
+}
+
+#divMainImage > img {
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: 1px 1px 2px 0 #666666;
+    width:100%;
+}
+
+.ThumbView {
+    float: left;
+    height: 107px;
+    margin: 15px 5px 0;
+    text-align: center;
+}
+
+.ThumbView > img {
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: 1px 1px 2px 0 #666666;
+    padding: 0px;
+    width: 100px;
+}
+
+.Loader
+{
+    height:100%;
+    width:100%;
+    background-color:#FFFFFF;
+    opacity: 0.8;
+    filter:alpha(opacity=80);
+    position:fixed;
+    z-index:2000;
+    padding-top: 150px;
+}
+
+.LoaderGIF, .LoadProgress {
+    border: 1px solid #91CB18;
+    border-radius: 15px 15px 15px 15px;
+    color: #333333;
+    font-family: Helvetica, Arial;
+    font-size: 15px;
+    margin: 0 auto;
+    position: relative;
+    text-align: center;
+    width: 30%;
+    padding: 5px;
+    overflow: hidden;
 }
 
 
-.catalogueTopLevel {
-    border: 1px solid #CCCCCC;
-    border-radius: 5px 5px 5px 5px;
-    box-shadow: 1px 0 3px 0 #CCCCCC;
+.LoaderGIF
+{
+    border:none;
+    font-size: 20px;
+    font-weight: lighter;
+}
+
+
+#spanProductImages {
+    display: block;
     float: left;
-    margin: 0 1%;
-    padding: 1%;
-    width: 20%;
+    height: 139px;
+    overflow-x: scroll;
+    width: 100%;
+    padding: 0 2px;
+}
+
+.ArrowLeft {
+    background-image: url("ArrowLeft.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    position: absolute;
+    height: 21px;
+    margin-top: 55px;
+    width: 22px;
+    margin-left:-26px;
+}
+
+.ArrowRight {
+    background-image: url("ArrowRight.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    position: absolute;
+    height: 21px;
+    margin-top: 55px;
+    width: 22px;
+    margin-right:-26px;
+    right:0;
+}
+
+.FilterFail{
+    background-color: #FCCAC1;
+    background-image: url("failureMsg.png");
+    background-position: 23px center;
+    background-repeat: no-repeat;
+    background-size: 17px 17px;
+    border: 1px solid #E47E6B;
+    border-radius: 4px 4px 4px 4px;
+    color: #333333;
+    font-size: 12px;
+    height: 12px;
+    padding: 13px 0 13px 5%;
+    width: 95%;
 }
