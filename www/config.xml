@@ -11,7 +11,7 @@
     Barron Catalogue app.
   </description>
 
-  <preference name="phonegap-version" value="2.5.0"/>
+  <preference name="phonegap-version" value="2.3.0"/>
   <preference name="both" value="landscape"/>
   <preference name="stay-in-webview" value="false" />
 
@@ -22,7 +22,10 @@
   <feature name="http://api.phonegap.com/1.0/camera"/>
   <feature name="http://api.phonegap.com/1.0/media"/>
   <feature name="http://api.phonegap.com/1.0/device"/>
-    
+
+  <plugin name="File" value="org.apache.cordova.FileUtils" />
+  <plugin name="FileTransfer" value="org.apache.cordova.FileTransfer" />
+  
   <icon src="icon.png" />
 
   <access origin="*" />
