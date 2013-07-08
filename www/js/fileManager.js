@@ -22,7 +22,7 @@ function createFile(name, data, callbackVars, callback, skipOverwrite, overwrite
 
         if (useSQL == true) {
             ignorCallback = true;
-            var db = window.openDatabase("BarronCat", "1.0", "BarronCat", (1024 * 1024 * 256) /* 256 mb */);
+            var db = window.openDatabase("BarronCat", "1.0", "BarronCat", 268435456);
             db.transaction(queryDB, errorCB);
 
         } else {
@@ -158,7 +158,7 @@ function querySuccess(tx, results) {
         callback(results.rows.item(0).data, results.rows.item(0).id);
     } else {
         if (results.rows.length == 0) {
-            var db = window.openDatabase("BarronCat", "1.0", "BarronCat", (1024 * 1024 * 256) /* 256 mb */);
+            var db = window.openDatabase("BarronCat", "1.0", "BarronCat", 268435456);
             db.transaction(populateDB, errorCB, successCB);
         }
     }
