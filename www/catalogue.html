@@ -175,7 +175,9 @@
         <a href="MediaQueryTest.html">Test Page</a>
 
         <script type="text/javascript">
-            
+
+
+
             var divCatalogueSelect = document.getElementById("divCatalogueSelect");
             var divListing = document.getElementById("divListing");
             var divDetail = document.getElementById("divDetail");
@@ -710,6 +712,8 @@
             
             function pageLoad() {
                 //check for downloaded catalogues
+
+                useSQL();
 
                 spanColor.innerHTML = ddColor.options[ddColor.selectedIndex].text;
 
