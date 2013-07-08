@@ -47,7 +47,7 @@
         //
         function successCB() {
             alert("successCB");
-            var db = window.openDatabase("BarronCat", "1.0", "BarronCat", (1024 * 1024 * 256) /* 256 mb */);
+            var db = window.openDatabase("BarronCat", "1.0", "BarronCat", 268435456);
             db.transaction(queryDB, errorCB);
         }
 
@@ -55,7 +55,7 @@
         //
         function onDeviceReady() {
             alert("onDeviceReady");
-            var db = window.openDatabase("BarronCat", "1.0", "BarronCat", (1024 * 1024 * 256) /* 256 mb */);
+            var db = window.openDatabase("BarronCat", "1.0", "BarronCat", 268435456);
             db.transaction(populateDB, errorCB, successCB);
         }
 
