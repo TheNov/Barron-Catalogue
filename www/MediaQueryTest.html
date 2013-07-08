@@ -7,48 +7,39 @@
     <meta charset="utf-8">
 
 
-    <script type="text/javascript" charset="utf-8" src="cordova-2.2.0.js"></script>
-    <script type="text/javascript" charset="utf-8" src="js/pgsqlite_plugin.js"></script>
+    <script type="text/javascript" charset="utf-8" src="cordova-1.7.0.js"></script>
+    <script type="text/javascript" charset="utf-8" src="pgsqlite_plugin.js"></script>
     <script type="text/javascript">
 
+        window.onerror = function (e, url, line) {
+            console.log("window.onerror ---");
+            console.log(JSON.stringify(e, null, '  '));
+            console.log(JSON.stringify(line, null, '  '));
+        };
+
         function onBodyLoad() {
-            alert("loaded");
+            console.log("loaded");
             document.addEventListener("deviceready", onDeviceReady, false);
         }
 
         function onDeviceReady() {
-            alert('start');
+            console.log('start');
             var db = new PGSQLitePlugin('testdb', onOpen, onFail);
 
             function onFail(e) {
-                alert("Error");
+                console.log("Error");
                 var error = JSON.stringify(e, null, '  ');
                 alert(error);
+                console.log(error);
             }
 
             function onOpen() {
-                alert('Database opened');
+                console.log('Database opened');
                 createTable();
             }
 
-<<<<<<< HEAD
-        // Transaction success callback
-        //
-        function successCB() {
-            alert("successCB");
-            var db = window.openDatabase("BarronCat", "1.0", "BarronCat", 268435456);
-            db.transaction(queryDB, errorCB);
-        }
-
-        // Cordova is readyw
-        //
-        function onDeviceReady() {
-            alert("onDeviceReady");
-            var db = window.openDatabase("BarronCat", "1.0", "BarronCat", 268435456);
-            db.transaction(populateDB, errorCB, successCB);
-=======
             function createTable() {
-                alert('Creating test table');
+                console.log('Creating test table');
                 var query = '' +
                     'CREATE TABLE IF NOT EXISTS "test" (' +
                     'Id INTEGER PRIMARY KEY AUTOINCREMENT,' +
@@ -59,44 +50,44 @@
             }
 
             function onCreateTable() {
-                alert('-> Test table created');
+                console.log('-> Test table created');
                 dropTable();
             }
 
             function dropTable() {
-                alert('Clean test table');
+                console.log('Clean test table');
                 var query = 'DELETE FROM "test" WHERE 1 = 1;';
                 db.executeSql(query, onDropTable, onFail);
             }
 
             function onDropTable() {
-                alert('-> Test table cleaned');
+                console.log('-> Test table cleaned');
                 setData();
             }
 
             function setData() {
-                alert('Insert some data in the table');
+                console.log('Insert some data in the table');
                 var query = 'INSERT INTO "test" VALUES(1, "ciao");';
                 db.executeSql(query, onSetData, onFail);
             }
 
             function onSetData() {
-                alert('-> Data has been set');
+                console.log('-> Data has been set');
                 getData();
             }
 
             function getData() {
-                alert('Getting data');
+                console.log('Getting data');
                 var query = 'SELECT * FROM "test" where Id = 1;'
                 db.executeSql(query, onGetData, onFail);
             }
 
             function onGetData(res) {
-                alert('-> Got the data');
-                alert(res);
+                console.log('-> Got the data');
+                console.log(res);
 
                 function onRow(row) {
-                    alert(JSON.stringify(row, null, '  '));
+                    console.log(JSON.stringify(row, null, '  '));
                 }
 
                 res.rows.forEach(onRow);
@@ -104,27 +95,26 @@
             }
 
             function transact() {
-                alert("Start a transaction");
+                console.log("Start a transaction");
                 db.transaction(onTransaction);
             }
 
             function onTransaction(tx) {
-                alert("Execute transaction");
+                console.log("Execute transaction");
                 tx.executeSql(['SELECT * FROM "test" where Id = 1;'], onTxDone, onFail);
             }
 
             function onTxDone(res) {
-                alert('-> Got the data from transaction');
-                alert(res);
+                console.log('-> Got the data from transaction');
+                console.log(res);
 
                 function onRow(row) {
-                    alert(JSON.stringify(row, null, '  '));
+                    console.log(JSON.stringify(row, null, '  '));
                 }
 
                 res.rows.forEach(onRow);
             }
 
->>>>>>> SQL Lite Plugin Test
         }
 
     </script>
