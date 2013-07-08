@@ -30,9 +30,8 @@
         function querySuccess(tx, results) {
             var len = results.rows.length;
 
-            alert(length);
-
-            console.log("DEMO table: " + len + " rows found.");
+            
+            alert("DEMO table: " + len + " rows found.");
             for (var i = 0; i < len; i++) {
                 console.log("Row = " + i + " ID = " + results.rows.item(i).id + " Data =  " + results.rows.item(i).data);
             }
@@ -41,12 +40,13 @@
         // Transaction error callback
         //
         function errorCB(err) {
-            console.log("Error processing SQL: " + err.code);
+            alert("Error processing SQL: " + err.code);
         }
 
         // Transaction success callback
         //
         function successCB() {
+            alert("successCB");
             var db = window.openDatabase("Database", "1.0", "Cordova Demo", 200000);
             db.transaction(queryDB, errorCB);
         }
@@ -54,6 +54,7 @@
         // Cordova is ready
         //
         function onDeviceReady() {
+            alert("onDeviceReady");
             var db = window.openDatabase("Database", "1.0", "Cordova Demo", 200000);
             db.transaction(populateDB, errorCB, successCB);
         }
