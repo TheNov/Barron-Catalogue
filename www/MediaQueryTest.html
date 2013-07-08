@@ -19,7 +19,7 @@
 
         function onBodyLoad() {
             alert("loaded");
-            document.addEventListener("deviceready", onDeviceReady, false);
+            setTimeout(function () { onDeviceReady() }, 1000);
         }
 
         function onDeviceReady() {
