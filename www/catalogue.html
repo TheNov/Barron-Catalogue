@@ -229,6 +229,9 @@
             
             function loadCatalogues() {
                 document.getElementById("divLoader").style.display = "block";
+
+                alert("loadCatalogues().WSCall");
+
                 WSCall(loadCataloguesComplete, "GetCatalogues", []);
             }
 
@@ -242,6 +245,9 @@
                             var sCatalogueHTML = "";
                             
                             
+                            alert("loadCataloguesComplete()");
+
+
                             $(data).find("catalogue").each(function () {
                                 var catalogue = catalogueLoad($(this).find("CatalogueID").text());
                                 
@@ -713,10 +719,12 @@
             function pageLoad() {
                 //check for downloaded catalogues
 
+                alert("useSQL()");
                 useSQL();
 
                 spanColor.innerHTML = ddColor.options[ddColor.selectedIndex].text;
 
+                alert("loadCatalogues()");
                 loadCatalogues();
 
                 //divLoader.style.display = "none";
