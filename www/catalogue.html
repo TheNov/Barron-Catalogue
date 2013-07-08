@@ -372,7 +372,8 @@
                             hidCatalogueID.value = CatalogueID;
                             
                             catalogueSave(CatalogueID, CatalogueName, PortraitImage);
-                            createFile("catalogue" + hidCatalogueID.value + ".xml", txtDataTemp.value, [], saveSuccess, true);
+
+                            createFile("catalogue" + hidCatalogueID.value + ".xml", txtDataTemp.value, [], saveSuccess, true, undefined, true);
                         }
                     }
 
@@ -422,7 +423,8 @@
                         if (sResult == "1") {
                             var row = 0;
                             txtImageData.value = data;
-                            createFile("product" + getTagValue(data, "productid") + ".xml", txtImageData.value, [], downloadImages);
+
+                            createFile("product" + getTagValue(data, "productid") + ".xml", txtImageData.value, [], downloadImages, undefined, undefined, true);
                         }
                         else {
                             handleError("getProductsComplete", getTagValue(data, "data"), "issue in data processing");

@@ -12,11 +12,7 @@ var ignorCallback = false; // Catalogues, Images
 // SQL Code at the bottom of the page
 //<write start>
 
-function useSQL() {
-    this.useSQL = true;
-}
-
-function createFile(name, data, callbackVars, callback, skipOverwrite, overwrite) {
+function createFile(name, data, callbackVars, callback, skipOverwrite, overwrite, useSQL) {
     try
     {
         this.fileName = name;
