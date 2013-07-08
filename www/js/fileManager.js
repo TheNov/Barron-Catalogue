@@ -7,6 +7,44 @@ var existCheck;
 var overwrite = true;
 
 //<write start>
+var createFile = function (filename, data, callbackVars, callback, skipOverwrite, overwrite) {
+    try{
+        var writeOutData = function () {
+            var fw = new FileWriter();
+            fw.oncomplete = callback;
+            fw.onerror = function () { 
+                alert("Failed to save update");
+            }
+            fw.writeAsText("myDir/" + filename, data);
+        }
+	
+        navigator.fileMgr.testDirectoryExists("myDir", function(exists) {
+            exists ? writeOutData() :
+			navigator.fileMgr.createDirectory("myDir", writeOutData, function() {
+			    alert("Failed to save update");
+			})
+        });
+    } catch (ex) {
+        alert(ex);
+    }
+};
+ 
+var readData = function (filename, callback) {
+	var filePath = "myDir/" + filename;
+	
+	var readInData = function () {
+		var fr = new FileReader();
+		fr.onload = function (data) {
+			callback(data);
+		};
+		fr.readAsText(filePath);
+	}		
+	
+	navigator.fileMgr.testFileExists(filePath, function(exists) {
+		exists ? readInData() : alert("file doesn't exist");
+	});
+}
+/*
 function createFile(name, data, callbackVars, callback, skipOverwrite, overwrite){
     this.fileName = name;
     this.fileData = data;
@@ -40,7 +78,7 @@ function gotFileWriter(writer) {
     writer.write(this.fileData);
 }
 //</write end>
-
+*/
 //<read start>
 function readFile(name, data, callback, vars, exist){
     this.fileName = name;
