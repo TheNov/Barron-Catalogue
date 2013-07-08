@@ -719,8 +719,12 @@
             function pageLoad() {
                 //check for downloaded catalogues
 
-                alert("useSQL()");
-                useSQL();
+                try{
+                    alert("useSQL()");
+                    useSQL();
+                } catch (ex) {
+                    alert("useSQL()");
+                }
 
                 spanColor.innerHTML = ddColor.options[ddColor.selectedIndex].text;
 
